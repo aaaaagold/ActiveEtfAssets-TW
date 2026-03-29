@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.border {
+ border: 1px solid black;
+}
+.hoverEffect:hover {
+ background-color:rgba(234,234,0,0.5);
+}
+.table-root {
+ border-spacing:0px;
+}
+.table-root div {
+ word-break: keep-all;
+ white-space: pre;
+ text-align: center;
+}
+.table-root td {
+ padding: 2px;
+ border: 1px solid black;
+}
+.table-header {
+ background-color:rgba(234,234,0,0.5);
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+"use strict";
+(()=>{
+
+const date0='2026-03-06';
+
+
+{ const p=HTMLElement.prototype,d=document;
+d.ce=d.createElement;
+d.ctxt=d.createTextNode;
+d.ge=d.getElementById;
+p.ac=function(c){ this.appendChild(c); return this; };
+p.atxt=function(t){ this.appendChild(d.ctxt(t)); return this; };
+p.rc=function(c){ this.removeChild(c); return this; }
+p.rf=function(i){
+	const arr=this.childNodes;
+	while(arr.length>i) this.rc(arr[arr.length-1]);
+	return this;
+};
+p.ra=function(a){ this.removeAttribute(a); return this; };
+p.ga=p.getAttribute;
+p.sa=function(a,v){ this.setAttribute(a,v); return this; };
+p.ae=function(t,f,o){ this.addEventListener.apply(this,arguments); return this; };
+p.re=function(t,f,o){ this.removeEventListener.apply(this,arguments); return this; };
+}
+const doc=document;
+
+window.jurl=(url, method, header, data, resType, callback, callback_all_h, callback_state4_all_t, callback_all_t, timeout_ms)=>{
+	const argv=[];
+	resType=resType||'';
+	let xhttp=new XMLHttpRequest();
+	if(0<timeout_ms) xhttp.timeout=timeout_ms;
+	xhttp.onreadystatechange=function(){
+		//if(callback_all_h&&callback_all_h.constructor===Function) ; // wtf
+		if((typeof callback_all_h)==="function"){
+			callback_all_h(this,argv);
+		}
+		//if(callback&&callback.constructor===Function) ; // wtf
+		if((typeof callback)==="function"){
+			if(this.readyState===4){
+				let s=this.status.toString();
+				if (s.length===3 && s.slice(0, 1)==='2'){
+					callback(this.response,this,argv);
+				}
+				if((typeof callback_state4_all_t)==="function"){
+					callback_state4_all_t(this,argv);
+				}
+			}
+		}
+		if((typeof callback_all_t)==="function"){
+			callback_all_t(this,argv);
+		}
+	}
+	;
+	xhttp.open(method, url, true);
+	xhttp.responseType=resType;
+	if(header) for(let i in header) xhttp.setRequestHeader(i,header[i]);
+	data=method === "GET" ? undefined : data;
+	argv.push(url,method,header,data,);
+	xhttp.send(data);
+	return xhttp;
+};
+
+const floorN=(v,n)=>parseInt(v/n)*n;
+const alignN=(v,n)=>parseInt(v/n)*n+(v%n!==0);
+const ms1d=86400*1e3;
+const invalidDat=-1;
+
+
+const root=doc.ge('root');
+const pannel=doc.ce('div');
+const content=doc.ce('div');
+root.ac(pannel).ac(content);
+const dataRaw=window._dbg_dataRaw=[];
+const data=window._dbg_data={};
+const allCodes=new Map();
+const allDates=new Set();
+allCodes.set('CASH','(M)');
+const sortedCodes=window._dbg_sortedCodes=[];
+data.CASH={};
+const pannelBtn=doc.ce('button').atxt('show / hide pannel');
+pannel.ac(pannelBtn);
+const pannelContent=doc.ce('div');
+pannel.ac(pannelContent);
+pannelBtn.onclick=()=>{
+	if(pannelContent._isHidden) pannelContent.style.display="";
+	else pannelContent.style.display="none";
+	pannelContent._isHidden=!pannelContent._isHidden;
+};
+//pannelBtn.click();
+const pannelContent_hideListRoot=doc.ce('div').sa('class','border');
+pannelContent.ac(pannelContent_hideListRoot);
+const pannelContent_hideListBtn=doc.ce('button').atxt('show / hide hideList');
+pannelContent_hideListRoot.ac(pannelContent_hideListBtn);
+const pannelContent_hideListContent=window._dbg_pannelContent_hideListContent=doc.ce('div');
+pannelContent_hideListRoot.ac(pannelContent_hideListContent);
+pannelContent_hideListBtn.onclick=()=>{
+	if(pannelContent_hideListContent._isHidden) pannelContent_hideListContent.style.display="";
+	else pannelContent_hideListContent.style.display="none";
+	pannelContent_hideListContent._isHidden=!pannelContent_hideListContent._isHidden;
+};
+pannelContent_hideListBtn.click();
+pannelContent_hideListContent._codes=new Map();
+pannelContent_hideListContent.ac(doc.ce('div').atxt('check to hide'));
+const addNewDat=dat=>{
+	if(dat===invalidDat) return;
+	
+	dat.ST.forEach(info=>{
+		allCodes.set(info.stockCode,info.stockName);
+		if(!data[info.stockCode]) data[info.stockCode]={};
+		if(!data[info.stockCode][dat.date]) data[info.stockCode][dat.date]={};
+		data[info.stockCode][dat.date].value=info.stockShare;
+	});
+	if(!data.CASH[dat.date]) data.CASH[dat.date]={};
+	data.CASH[dat.date].value=dat.CASH/1e6;
+	allDates.add(dat.date);
+	
+	const codes=sortedCodes; codes.length=0; allCodes.forEach((v,k)=>codes.push([k,v]));
+	codes.sort((a,b)=>{
+		const va=a[0]==='CASH'?' ':a[0];
+		const vb=b[0]==='CASH'?' ':b[0];
+		return va===vb?0:va<vb?-1:1;
+	});
+	//console.log(codes);
+	
+	return true;
+};
+const reRenderPannel=()=>{
+	const codes=sortedCodes;
+	// hideList
+	{
+		const root=pannelContent_hideListContent;
+		const m=root._codes;
+		const nodesInfo=[];
+		root.rf(1);
+		codes.forEach(x=>{
+			let node=m.get(x[0]);
+			if(!node){
+				let chkBox;
+				m.set(
+					x[0],
+					node=doc.ce('div').ac(chkBox=doc.ce('input').sa('type','checkbox')).atxt(x[0]).atxt('\t').atxt(x[1]),
+				);
+				node._chkBox=chkBox;
+			}
+			root.ac(node);
+		});
+	}
+};
+const reRenderContent=()=>{
+	const codes=sortedCodes.filter(x=>{
+		const hideChkBoxRoot=pannelContent_hideListContent._codes.get(x[0]);
+		const hideChkBoxNode=hideChkBoxRoot&&hideChkBoxRoot._chkBox;
+		const isHidden=hideChkBoxNode&&hideChkBoxNode.checked;
+		return !isHidden;
+	});
+	const dates=[]; allDates.forEach(v=>dates.push(v));
+	dates.sort();
+	content.rf(0);
+	const thead=doc.ce('thead');
+	const tbody=doc.ce('tbody').sa('class','table-tbody');
+	content.ac(doc.ce('table').ac(thead).ac(tbody).sa('class','table-root'));
+	// header
+	{
+		const tr=doc.ce('tr').sa('class','table-header');
+		thead.ac(tr);
+		tr.ac(doc.ce('td').ac(doc.ce('div').atxt("date \\ stock")));
+		codes.forEach(x=>{
+			tr.ac(doc.ce('td').ac(
+				doc.ce('div').atxt(x[0])
+			).ac(
+				doc.ce('div').atxt(x[1])
+			));
+		});
+	}
+	// body
+	dates.forEach(d=>{
+		const tr=doc.ce('tr');
+		tbody.ac(tr);
+		tr.ac(doc.ce('td').ac(doc.ce('div').atxt(d)));
+		codes.forEach(x=>{
+			if(!data[x[0]][d]) data[x[0]][d]={};
+			if(!data[x[0]][d].nodeRoot) data[x[0]][d].nodeRoot=doc.ce('td').ac(data[x[0]][d].nodeContent=doc.ce('div'));
+			data[x[0]][d].nodeContent.rf(0);
+			data[x[0]][d].nodeContent.atxt(data[x[0]][d].value||0);
+			tr.ac(data[x[0]][d].nodeRoot);
+		});
+	});
+};
+const reRender=()=>{
+	reRenderPannel();
+	reRenderContent();
+};
+const pannelContent_reRenderBtn=doc.ce('button').atxt('re-render');
+pannelContent.ac(pannelContent_reRenderBtn);
+pannelContent_reRenderBtn.onclick=()=>{
+	reRenderContent();
+};
+
+
+for(let i=0,t=floorN(new Date(date0).getTime(),ms1d),te=alignN(Date.now(),ms1d);t<te;++i,t+=ms1d){
+	const raw=new Date(t).toISOString();
+	const d=raw.slice(0,raw.indexOf("T"));
+	const idx=i;
+	jurl(d+'.json',"GET",0,0,0,res=>{
+		const dat=dataRaw[idx]=JSON.parse(res);
+		dat.date=d;
+		//console.log(dat);
+	},undefined,res=>{
+		if(!dataRaw[idx]) dataRaw[idx]=invalidDat;
+		if(!addNewDat(dataRaw[idx])) return;
+		reRender();
+	});
+}
+
+})();
+</script>
+</body>
+</html>
