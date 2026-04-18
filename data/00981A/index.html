@@ -23,6 +23,12 @@
 .table-header {
  background-color:rgba(234,234,0,0.5);
 }
+.table-tbody {
+ transform:scale(1,-1);
+}
+.table-tbody>* {
+ transform:scale(1,-1);
+}
 </style>
 </head>
 <body>
@@ -130,7 +136,19 @@ pannelContent_hideListBtn.onclick=()=>{
 };
 pannelContent_hideListBtn.click();
 pannelContent_hideListContent._codes=new Map();
-pannelContent_hideListContent.ac(doc.ce('div').atxt('check to hide'));
+const pannelContent_hideListContent_header=doc.ce('div');
+const pannelContent_hideListContent_header_btnCheckAll=doc.ce('button').atxt('check all');
+const pannelContent_hideListContent_header_btnUncheckAll=doc.ce('button').atxt('uncheck all');
+let allItemsHidingBtnStat=false;
+pannelContent_hideListContent.ac(pannelContent_hideListContent_header.ac(
+	doc.ce('div').atxt('check to hide')
+).
+ac(
+	pannelContent_hideListContent_header_btnCheckAll
+).
+ac(
+	pannelContent_hideListContent_header_btnUncheckAll
+));
 const addNewDat=dat=>{
 	if(dat===invalidDat) return;
 	
@@ -154,6 +172,16 @@ const addNewDat=dat=>{
 	
 	return true;
 };
+const setAllItemsHidingBtnStat=checked=>{
+	allItemsHidingBtnStat=!!checked;
+	const root=pannelContent_hideListContent;
+	root._codes.forEach((v,k)=>{
+		const node=v;
+		if(node&&node._chkBox) node._chkBox.checked=allItemsHidingBtnStat;
+	});
+};
+pannelContent_hideListContent_header_btnCheckAll.onclick=()=>setAllItemsHidingBtnStat(true);
+pannelContent_hideListContent_header_btnUncheckAll.onclick=()=>setAllItemsHidingBtnStat(false);
 const reRenderPannel=()=>{
 	const codes=sortedCodes;
 	// hideList
@@ -171,6 +199,7 @@ const reRenderPannel=()=>{
 					node=doc.ce('div').ac(chkBox=doc.ce('input').sa('type','checkbox')).atxt(x[0]).atxt('\t').atxt(x[1]),
 				);
 				node._chkBox=chkBox;
+				chkBox.checked=allItemsHidingBtnStat;
 			}
 			root.ac(node);
 		});
