@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div>
+<script>
+"use strict";
+(()=>{
+const scr=document.currentScript;
+const root=scr.parentNode;
+const dataRoots=[
+"00981A",
+];
+dataRoots.forEach(dataRoot=>{
+	const s=document.createElement('div');
+	const a=document.createElement('a');
+	a.href="data/"+dataRoot;
+	a.appendChild(document.createTextNode(dataRoot));
+	s.appendChild(a);
+	root.appendChild(s);
+});
+})();
+</script>
+</div>
+</body>
+</html>
+
