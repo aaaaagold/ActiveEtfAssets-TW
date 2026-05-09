@@ -70,11 +70,15 @@ def ParseUrl(url):
 
 def gitProc(fileName):
 	gitStatus=['git','status']
+	gitFetchMain=['git','fetch','origin','main']
+	gitResetMain=['git','reset','origin/main']
 	gitRestore=['git','restore','.']
 	gitAdd=['git','add','.']
 	gitCommit=['git','commit','-m','add '+fileName.replace("\\","\\\\").replace('"','\\"')+'']
 	gitPush=['git','push','-f']
 	cmds=[
+		gitFetchMain,
+		gitResetMain,
 		gitRestore,
 		gitAdd,
 		gitCommit,
