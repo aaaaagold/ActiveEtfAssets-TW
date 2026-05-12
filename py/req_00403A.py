@@ -74,7 +74,7 @@ def gitProc(fileName):
 	gitResetMain=['git','reset','origin/main']
 	gitRestore=['git','restore','.']
 	gitAdd=['git','add','.']
-	gitCommit=['git','commit','-m','add '+fileName.replace("\\","\\\\").replace('"','\\"')+'']
+	gitCommit=['git','commit','-m','add 00403A '+fileName.replace("\\","\\\\").replace('"','\\"')+'']
 	gitPush=['git','push','-f']
 	cmds=[
 		gitFetchMain,
