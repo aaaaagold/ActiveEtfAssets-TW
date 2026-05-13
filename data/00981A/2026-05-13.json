@@ -1,0 +1,261 @@
+{
+	"editDate": "2026-05-13T16:30:33",
+	"ST": [
+		{
+			"stockCode": "2330",
+			"stockShare": 11657000,
+			"stockName": "\u53f0\u7a4d\u96fb"
+		},
+		{
+			"stockCode": "2383",
+			"stockShare": 4605000,
+			"stockName": "\u53f0\u5149\u96fb"
+		},
+		{
+			"stockCode": "2345",
+			"stockShare": 6231000,
+			"stockName": "\u667a\u90a6"
+		},
+		{
+			"stockCode": "2454",
+			"stockShare": 4263000,
+			"stockName": "\u806f\u767c\u79d1"
+		},
+		{
+			"stockCode": "2308",
+			"stockShare": 6572000,
+			"stockName": "\u53f0\u9054\u96fb"
+		},
+		{
+			"stockCode": "6669",
+			"stockShare": 2294000,
+			"stockName": "\u7def\u7a4e"
+		},
+		{
+			"stockCode": "3017",
+			"stockShare": 4813000,
+			"stockName": "\u5947\u92d0"
+		},
+		{
+			"stockCode": "6223",
+			"stockShare": 2169000,
+			"stockName": "\u65fa\u77fd"
+		},
+		{
+			"stockCode": "3665",
+			"stockShare": 4703848,
+			"stockName": "\u8cbf\u806f-KY"
+		},
+		{
+			"stockCode": "8046",
+			"stockShare": 12658000,
+			"stockName": "\u5357\u96fb"
+		},
+		{
+			"stockCode": "3037",
+			"stockShare": 10822000,
+			"stockName": "\u6b23\u8208"
+		},
+		{
+			"stockCode": "2368",
+			"stockShare": 7018000,
+			"stockName": "\u91d1\u50cf\u96fb"
+		},
+		{
+			"stockCode": "5274",
+			"stockShare": 483000,
+			"stockName": "\u4fe1\u9a4a"
+		},
+		{
+			"stockCode": "3711",
+			"stockShare": 14998000,
+			"stockName": "\u65e5\u6708\u5149\u6295\u63a7"
+		},
+		{
+			"stockCode": "3653",
+			"stockShare": 2267000,
+			"stockName": "\u5065\u7b56"
+		},
+		{
+			"stockCode": "2327",
+			"stockShare": 18313000,
+			"stockName": "\u570b\u5de8*"
+		},
+		{
+			"stockCode": "6274",
+			"stockShare": 4151000,
+			"stockName": "\u53f0\u71ff"
+		},
+		{
+			"stockCode": "2303",
+			"stockShare": 46374000,
+			"stockName": "\u806f\u96fb"
+		},
+		{
+			"stockCode": "6515",
+			"stockShare": 442000,
+			"stockName": "\u7a4e\u5d34"
+		},
+		{
+			"stockCode": "3443",
+			"stockShare": 764000,
+			"stockName": "\u5275\u610f"
+		},
+		{
+			"stockCode": "2449",
+			"stockShare": 12919000,
+			"stockName": "\u4eac\u5143\u96fb\u5b50"
+		},
+		{
+			"stockCode": "6510",
+			"stockShare": 930000,
+			"stockName": "\u7cbe\u6e2c"
+		},
+		{
+			"stockCode": "6805",
+			"stockShare": 1761000,
+			"stockName": "\u5bcc\u4e16\u9054"
+		},
+		{
+			"stockCode": "8210",
+			"stockShare": 1967000,
+			"stockName": "\u52e4\u8aa0"
+		},
+		{
+			"stockCode": "3264",
+			"stockShare": 9030000,
+			"stockName": "\u6b23\u9293"
+		},
+		{
+			"stockCode": "6187",
+			"stockShare": 1224000,
+			"stockName": "\u842c\u6f64"
+		},
+		{
+			"stockCode": "2404",
+			"stockShare": 1394000,
+			"stockName": "\u6f22\u5510"
+		},
+		{
+			"stockCode": "2357",
+			"stockShare": 1996000,
+			"stockName": "\u83ef\u78a9"
+		},
+		{
+			"stockCode": "5439",
+			"stockShare": 3228000,
+			"stockName": "\u9ad8\u6280"
+		},
+		{
+			"stockCode": "8996",
+			"stockShare": 1034000,
+			"stockName": "\u9ad8\u529b"
+		},
+		{
+			"stockCode": "2313",
+			"stockShare": 4124000,
+			"stockName": "\u83ef\u901a"
+		},
+		{
+			"stockCode": "8150",
+			"stockShare": 11334000,
+			"stockName": "\u5357\u8302"
+		},
+		{
+			"stockCode": "8358",
+			"stockShare": 1980000,
+			"stockName": "\u91d1\u5c45"
+		},
+		{
+			"stockCode": "4966",
+			"stockShare": 1036000,
+			"stockName": "\u8b5c\u745e-KY"
+		},
+		{
+			"stockCode": "1590",
+			"stockShare": 530000,
+			"stockName": "\u4e9e\u5fb7\u5ba2-KY"
+		},
+		{
+			"stockCode": "3008",
+			"stockShare": 159000,
+			"stockName": "\u5927\u7acb\u5149"
+		},
+		{
+			"stockCode": "2481",
+			"stockShare": 3654000,
+			"stockName": "\u5f37\u8302"
+		},
+		{
+			"stockCode": "3661",
+			"stockShare": 89000,
+			"stockName": "\u4e16\u82af-KY"
+		},
+		{
+			"stockCode": "6415",
+			"stockShare": 940000,
+			"stockName": "\u77fd\u529b*-KY"
+		},
+		{
+			"stockCode": "6191",
+			"stockShare": 3988000,
+			"stockName": "\u7cbe\u6210\u79d1"
+		},
+		{
+			"stockCode": "3036",
+			"stockShare": 1200000,
+			"stockName": "\u6587\u66c4"
+		},
+		{
+			"stockCode": "3376",
+			"stockShare": 1741000,
+			"stockName": "\u65b0\u65e5\u8208"
+		},
+		{
+			"stockCode": "3217",
+			"stockShare": 874000,
+			"stockName": "\u512a\u7fa4"
+		},
+		{
+			"stockCode": "2002",
+			"stockShare": 5163000,
+			"stockName": "\u4e2d\u92fc"
+		},
+		{
+			"stockCode": "1319",
+			"stockShare": 511000,
+			"stockName": "\u6771\u967d"
+		},
+		{
+			"stockCode": "1815",
+			"stockShare": 107000,
+			"stockName": "\u5bcc\u55ac"
+		},
+		{
+			"stockCode": "2439",
+			"stockShare": 18000,
+			"stockName": "\u7f8e\u5f8b"
+		},
+		{
+			"stockCode": "2337",
+			"stockShare": 8000,
+			"stockName": "\u65fa\u5b8f"
+		},
+		{
+			"stockCode": "6147",
+			"stockShare": 1000,
+			"stockName": "\u980e\u90a6"
+		},
+		{
+			"stockCode": "2317",
+			"stockShare": 1000,
+			"stockName": "\u9d3b\u6d77"
+		},
+		{
+			"stockCode": "5347",
+			"stockShare": 1000,
+			"stockName": "\u4e16\u754c"
+		}
+	],
+	"CASH": 7848033996.0
+}
