@@ -145,28 +145,40 @@ def Req(host,port,path,Conn,cookies={}):
 	
 	data=response.read()
 	conn.close()
-	if 'content-encoding' in responseHeaders and responseHeaders['content-encoding']=='gzip':
+	lowerCaseKeysMapping={}
+	for k in responseHeaders: lowerCaseKeysMapping[k.lower()]=k
+	if 'content-encoding' in lowerCaseKeysMapping and lowerCaseKeysMapping['content-encoding'] in responseHeaders and responseHeaders[lowerCaseKeysMapping['content-encoding']]=='gzip':
 		data=gzip.GzipFile(fileobj=io.BytesIO(data)).read()
+		print('gzip')
 	if isShowingDebugInfos:
 		print(data)
 	
+	print(responseHeaders)
 	if response.status==301 or response.status==302:
-		if 'set-cookie' in responseHeaders:
-			newCookieStr=responseHeaders['set-cookie']
+		if 'set-cookie' in lowerCaseKeysMapping and lowerCaseKeysMapping['set-cookie'] in responseHeaders:
+			newCookieStr=responseHeaders[lowerCaseKeysMapping['set-cookie']]
 			newCookies=re.split(r';[ ]*',newCookieStr)
 			for newCookie in newCookies:
 				idx=newCookie.find('=')
 				if idx<0: cookies[newCookie]=True
 				else: cookies[newCookie[0:idx]]=newCookie[idx+1:]
-		if 'location' in responseHeaders:
-			rtv=responseHeaders['location']
+		if 'location' in lowerCaseKeysMapping and lowerCaseKeysMapping['location'] in responseHeaders:
+			rtv=responseHeaders[lowerCaseKeysMapping['location']]
+		print('3xx',rtv)
 	else:
+		print('^3xx')
 		try:
 			with open(lastResponsePath,'wb') as f:
 				f.write(data)
-		except:
+		except Exception as e:
+			print('open error',lastResponsePath),print(e)
 			pass
-		plain=data.decode('utf-8')
+		plain=''
+		try:
+			plain+=data.decode('utf-8')
+		except Exception as e:
+			print('decode error'),print(e)
+			pass
 		lines=plain.split('\n')
 		parser=re.compile(r'^\<div id="DataAsset"')
 		for line in lines:
